@@ -1,8 +1,3 @@
-"""
-FastAPI ML Pipeline Backend
-Run locally: uvicorn main:app --reload --port 8000
-"""
-
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -20,7 +15,7 @@ app = FastAPI(title="ML Pipeline API")
 # -------------------- CORS --------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # frontend URL in production
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -106,7 +101,7 @@ async def upload_dataset(file: UploadFile = File(...)):
         return {
             "filename": file.filename,
             "rows": len(df),
-            "columns": df.columns.tolist(),          # ✅ frontend-safe
+            "columns": df.columns.tolist(),         
             "numericColumns": numeric_cols,
             "preview": df.head(5).to_dict(orient="records"),
         }
